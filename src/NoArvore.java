@@ -113,4 +113,11 @@ public class NoArvore {
             }
         }
     }
+    int tamanho (NoArvore tree) {
+        if (tree == null) {
+            return 0;
+        } else {
+            return 1 + tamanho(tree.esquerda) + tamanho(tree.direita);
+        }
+    }
 }

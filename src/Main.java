@@ -30,11 +30,18 @@ public class Main {
         System.out.println("\nImpressão em Nível:");
         tree.ImpNivel(tree);
 
-        System.out.println("\nRemovendo 5 elementos da árvore:");
         for (int i = 0; i < 5; i++) {
-            int num = random.nextInt(101);
-            System.out.println("Removendo " + num);
-            tree = tree.retira(tree, num);
+            // Gerar um valor aleatório presente na árvore
+            int valor = random.nextInt(101); // Gere um número entre 0 e 100 para buscar
+
+            // Enquanto o valor gerado não estiver na árvore, gere outro valor
+            while (tree.Search(tree, valor) == null) {
+                valor = random.nextInt(101);
+            }
+
+            // Remova o elemento
+            tree = tree.retira(tree, valor);
+            System.out.println("\nRemovendo 5 elementos da árvore:" + valor);
         }
 
         System.out.println("\nImpressão em Pré-ordem após remoção:");
