@@ -1,5 +1,5 @@
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class NoArvore {
 
@@ -49,31 +49,38 @@ public class NoArvore {
         return tree;
     }
 
-    NoArvore Retira(NoArvore tree, int valor) {
+    NoArvore retira(NoArvore tree, int valor) {
         if (tree == null) {
-            System.out.println("Elemento não encontrado " + valor);
+            System.out.println("Elemento não encontrado..: " + valor);
             return null;
         } else if (tree.info > valor) {
-            tree.esquerda = Retira(tree.esquerda, valor);
+            tree.esquerda = retira(tree.esquerda, valor);
         } else if (tree.info < valor) {
-            tree.direita = Retira(tree.direita, valor);
+            tree.direita = retira(tree.direita, valor);
         } else {
+            // Nó sem filhos
             if (tree.esquerda == null && tree.direita == null) {
                 tree = null;
             } else if (tree.esquerda == null) {
-                NoArvore novo = tree;
+                // Nó só tem filho à direita
                 tree = tree.direita;
             } else if (tree.direita == null) {
-                NoArvore novo = tree;
+                // Nó só tem filho à esquerda
                 tree = tree.esquerda;
             } else {
-                NoArvore novo = tree.esquerda;
-                while (novo.direita != null) {
-                    novo = novo.direita;
-                }
-                tree.info = novo.info;
-                novo.info = valor;
+                // Nó tem dois filhos
+                NoArvore novo = encontraMenor(tree.direita);
+                tree.info = novo.info; // Troca de informações
+                tree.direita = retira(tree.direita, novo.info);
             }
+        }
+        return tree;
+    }
+
+    // Função auxiliar para encontrar o nó com o menor valor em uma subárvore
+    NoArvore encontraMenor(NoArvore tree) {
+        while (tree.esquerda != null) {
+            tree = tree.esquerda;
         }
         return tree;
     }

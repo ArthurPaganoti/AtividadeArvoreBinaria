@@ -34,7 +34,7 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             int num = random.nextInt(101);
             System.out.println("Removendo " + num);
-            tree = tree.Retira(tree, num);
+            tree = tree.retira(tree, num);
         }
 
         System.out.println("\nImpressão em Pré-ordem após remoção:");
